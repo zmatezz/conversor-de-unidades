@@ -12,13 +12,13 @@ function convert() {
   const toValue = toElement.value;
   const inputValue = parseFloat(inputElement.value);
 
-  if (inputValue === 0 && fromValue === toValue) {
-    const message = "Insira um valor e outra unidade de medida";
+  if (!inputValue) {
+    const message = "Insira um valor";
     messageElement.textContent = message;
     outputElement.value = "";
     return;
-  } else if (inputValue === 0) {
-    const message = "Insira um valor";
+  } else if (inputValue === 0 && fromValue === toValue) {
+    const message = "Insira um valor e outra unidade de medida";
     messageElement.textContent = message;
     outputElement.value = "";
     return;
