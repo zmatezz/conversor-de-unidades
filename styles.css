@@ -67,7 +67,7 @@ button:hover{
   margin-top: 1.2rem;
 }
 
-#message{
+.message{
   font-size: .8rem;
   color: #4caf50;
   margin-top: .7rem;

@@ -1,45 +1,70 @@
-/* Selecionar os elementos */
+// Selecionar os elementos
+const inputElement = document.querySelector("#input");
+const fromElement = document.querySelector("#from");
+const toElement = document.querySelector("#to");
+const outputElement = document.querySelector("#output");
+const convertButton = document.querySelector("#convert-btn");
+const messageElement = document.querySelector(".message");
 
-const inputElement = document.querySelector("#input")
-const fromElement = document.querySelector("#from")
-const toElement = document.querySelector("#to")
-const outputElement = document.querySelector("#output")
-const convertButton = document.querySelector("#convert-btn")
-const messageElement = document.querySelector("#message")
-
-/* função para converter as unidades */
+// Função para converter as unidades
 function convert() {
   const fromValue = fromElement.value;
   const toValue = toElement.value;
 
   if (fromValue === toValue) {
-    outputElement.value = inputElement.value;
-    messageElement.textContent = "";
+    const message = "Selecione outra unidade de medida";
+    messageElement.textContent = message;
     return;
   }
 
-  /* Converter a entrada para metros */
-  let meters
+  // Converter a entrada para metros
+  let meters;
   switch (fromValue) {
     case "m":
-      meters = inputElement.value
-      break
+      meters = inputElement.value;
+      break;
 
     case "km":
-      meters = inputElement.value * 1000
-      break
+      meters = inputElement.value * 1000;
+      break;
 
     case "cm":
-      meters = inputElement.value / 100
-      break
+      meters = inputElement.value / 100;
+      break;
 
     case "mm":
       meters = inputElement.value / 1000;
-      break
+      break;
   }
 
+  // Converter metros para unidade de saída
+  let result;
+  switch (toValue) {
+    case "m":
+      result = meters;
+      break;
 
-  console.log(fromValue, toValue)
+    case "km":
+      result = meters / 1000;
+      break;
+
+    case "cm":
+      result = meters * 100;
+      break;
+
+    case "mm":
+      result = meters * 1000;
+      break;
+  }
+
+  // Exibir resultado no input
+  outputElement.value = result;
+
+  // Exibir resultado na mensagem
+  const fromLabel = fromElement.options[fromElement.selectedIndex].text;
+  const toLabel = toElement.options[toElement.selectedIndex].text;
+  const message = `${inputElement.value} ${fromLabel} equivalem a ${result} ${toLabel}`;
+  messageElement.textContent = message;
 }
 
-convertButton.addEventListener("click", convert)
+convertButton.addEventListener("click", convert);
