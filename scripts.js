@@ -10,10 +10,22 @@ const messageElement = document.querySelector(".message");
 function convert() {
   const fromValue = fromElement.value;
   const toValue = toElement.value;
+  const inputValue = parseFloat(inputElement.value);
 
-  if (fromValue === toValue) {
+  if (inputValue === 0 && fromValue === toValue) {
+    const message = "Insira um valor e outra unidade de medida";
+    messageElement.textContent = message;
+    outputElement.value = "";
+    return;
+  } else if (inputValue === 0) {
+    const message = "Insira um valor";
+    messageElement.textContent = message;
+    outputElement.value = "";
+    return;
+  } else if (fromValue === toValue) {
     const message = "Selecione outra unidade de medida";
     messageElement.textContent = message;
+    outputElement.value = "";
     return;
   }
 
@@ -21,19 +33,19 @@ function convert() {
   let meters;
   switch (fromValue) {
     case "m":
-      meters = inputElement.value;
+      meters = inputValue;
       break;
 
     case "km":
-      meters = inputElement.value * 1000;
+      meters = inputValue * 1000;
       break;
 
     case "cm":
-      meters = inputElement.value / 100;
+      meters = inputValue / 100;
       break;
 
     case "mm":
-      meters = inputElement.value / 1000;
+      meters = inputValue / 1000;
       break;
   }
 
@@ -63,7 +75,7 @@ function convert() {
   // Exibir resultado na mensagem
   const fromLabel = fromElement.options[fromElement.selectedIndex].text;
   const toLabel = toElement.options[toElement.selectedIndex].text;
-  const message = `${inputElement.value} ${fromLabel} equivalem a ${result} ${toLabel}`;
+  const message = `${inputValue} ${fromLabel} equivalem a ${result} ${toLabel}`;
   messageElement.textContent = message;
 }
 
